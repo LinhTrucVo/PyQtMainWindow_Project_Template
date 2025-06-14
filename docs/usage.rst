@@ -4,7 +4,7 @@ Usage Guide
 This guide explains how to use the PyQtMainWindow Project Template to create multi-threaded Qt applications.
 
 Basic Concepts
--------------
+--------------
 
 The template provides several key components:
 
@@ -13,7 +13,7 @@ The template provides several key components:
 3. **Bico_QWindowThread_UI**: UI thread management and window creation
 
 Creating a New Window
--------------------
+---------------------
 
 Here's a basic example of creating a new window:
 
@@ -51,7 +51,7 @@ Here's a basic example of creating a new window:
     window_thread.start()
 
 Thread Communication
-------------------
+--------------------
 
 To send messages between threads:
 
@@ -69,7 +69,7 @@ To send messages between threads:
                 print(message["data"])
 
 Multiple Windows
---------------
+----------------
 
 To create multiple windows:
 
@@ -98,7 +98,7 @@ To create multiple windows:
     window2.start()
 
 Window Management
----------------
+-----------------
 
 Access and manage windows:
 
@@ -115,7 +115,7 @@ Access and manage windows:
     window.wait()
 
 Best Practices
--------------
+--------------
 
 1. **Queue Management**
    - Always check queue size before sending messages
@@ -138,7 +138,7 @@ Best Practices
    - Log errors appropriately
 
 Example Applications
-------------------
+--------------------
 
 1. **Simple Window**
    - Basic window creation and management
@@ -152,4 +152,4 @@ Example Applications
    - Advanced UI components
    - Multiple thread synchronization
 
-For more examples, check the `examples` directory in the project repository. 
+For more examples, check the `examples` directory in the project repository.

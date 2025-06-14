@@ -1,3 +1,24 @@
+"""
+main.py
+=======
+
+Entry point for the PyQtMainWindow Project Template.
+
+This script initializes the QApplication, sets up the main application context,
+creates and starts multiple window threads using the core framework.
+
+.. uml::
+
+   @startuml
+   actor User
+   User -> main.py : start application
+   main.py -> Bico_QWindowThread : setMainApp(app)
+   main.py -> Bico_QWindowThread : create(...)
+   main.py -> Bico_QWindowThread : getThreadHash()["task_0"].start()
+   main.py -> Bico_QWindowThread : getThreadHash()["task_1"].start()
+   @enduml
+"""
+
 import sys
 from PySide6.QtWidgets import QApplication
 
@@ -7,18 +28,14 @@ from Template_Material.bico_qwindowthread_ui import Bico_QWindowThread_UI
 from Client_Code.Bico_QWindowThread_Sample.Bico_QWindowThread_Sample import Bico_QWindowThread_Sample
 from Client_Code.Bico_QWindowThread_Sample.Bico_QWindowThread_Sample_UI import Bico_QWindowThread_Sample_UI
 
-
-"""
-Main entry point for the PyQtMainWindow Project Template.
-Initializes the QApplication and sets up window threads and UIs.
-"""
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setQuitOnLastWindowClosed(False)
 
+    # Register the main application with the thread manager
     Bico_QWindowThread.setMainApp(app)
 
+    # Create and start two window threads with their UIs
     Bico_QWindowThread.create(
         Bico_QWindowThread_Sample,
         Bico_QMutexQueue(),

@@ -1,5 +1,5 @@
 Welcome to PyQtMainWindow Project Template's documentation!
-====================================================
+===========================================================
 
 .. toctree::
    :maxdepth: 2
@@ -27,7 +27,7 @@ Features
 * Thread synchronization utilities
 
 Quick Start
-----------
+-----------
 
 .. code-block:: python
 
@@ -50,7 +50,7 @@ Quick Start
     Bico_QWindowThread.getThreadHash()["window_name"].start()
 
 Architecture Overview
--------------------
+---------------------
 
 The project follows a modular architecture with clear separation of concerns:
 
@@ -66,4 +66,4 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search` 
+* :ref:`search`

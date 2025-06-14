@@ -1,6 +1,17 @@
 """
-Bico_QWindowThread_Sample module.
-Defines a sample window thread class for demonstration purposes.
+Bico_QWindowThread_Sample.py
+============================
+
+Sample implementation of a window thread for demonstration purposes.
+
+.. uml::
+
+   @startuml
+   class Bico_QWindowThread_Sample {
+       +MainTask()
+   }
+   Bico_QWindowThread_Sample --|> Bico_QWindowThread
+   @enduml
 """
 
 import sys, os
@@ -13,10 +24,26 @@ from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object impor
 
 
 class Bico_QWindowThread_Sample(Bico_QWindowThread):
+    """
+    Example subclass of Bico_QWindowThread for demonstration.
+
+    Implements the main task logic for the sample window thread.
+
+    :cvar i: Counter for demonstration.
+    :cvar ex_data_obj: Example data object.
+    """
+
     i = 0
     ex_data_obj = Example_Data_Object()
 
     def MainTask(self):
+        """
+        Main logic for the sample window thread.
+
+        Processes messages from the input queue and demonstrates inter-thread communication.
+
+        :return: 1 to continue running, 0 to terminate.
+        """
         continue_to_run = 1
         i = 0
         input, result = self.qinDequeue()

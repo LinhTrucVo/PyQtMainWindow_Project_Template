@@ -1,51 +1,57 @@
 """
-Bico_QMutexQueue Module
-=======================
+bico_qmutexqueue.py
+===================
 
-This module provides a thread-safe queue implementation using Qt's mutex mechanism.
-It is designed for safe communication between threads in PyQt/PySide6 applications.
+Defines Bico_QMutexQueue, a thread-safe queue for inter-thread communication.
 
-Main Class:
-- Bico_QMutexQueue: A mutex-protected queue for inter-thread messaging.
+.. uml::
 
-Usage:
-------
-Import and use Bico_QMutexQueue to safely pass messages between threads.
-
-Example:
-    from Template_Material.bico_qmutexqueue import Bico_QMutexQueue
-    queue = Bico_QMutexQueue()
-    queue.put(item)
-    item = queue.get()
-
-Classes
--------
-Bico_QMutexQueue
-    A thread-safe queue implementation using Qt's mutex for synchronization.
+   @startuml
+   class Bico_QMutexQueue {
+       +enqueue(item)
+       +enqueueToBack(item)
+       +dequeue()
+       +dequeueFromFront()
+   }
+   @enduml
 """
 
 from PySide6.QtCore import QMutex, QMutexLocker
 from collections import deque
 
 class Bico_QMutexQueue(deque):
-    pass
+    """
+    Thread-safe queue using QMutex for synchronization.
+    Inherits from collections.deque.
+    """
     def __init__(self, items = []):
+        """
+        Initialize the queue.
+
+        :param items: Optional initial items.
+        """
         deque.__init__(self, items)
         self._mutex = QMutex()
 
     def enqueue(self, item):
+        """Add an item to the queue (thread-safe)."""
         self._mutex.lock()
         self.append(item)
         self._mutex.unlock()
 
     def enqueueToBack(self, item):
+        """Add an item to the back of the queue (thread-safe)."""
         self._mutex.lock()
         self.appendleft(item)
         self._mutex.unlock()
-    
+
     def dequeue(self):
+        """
+        Remove and return an item from the front of the queue (thread-safe).
+
+        :return: (item, success_flag)
+        """
         self._mutex.lock()
-        # if data available in queue
         if len(self) > 0:
             item = self.popleft()
             sucessful = 1
@@ -56,8 +62,12 @@ class Bico_QMutexQueue(deque):
         return item, sucessful
 
     def dequeueFromFront(self):
+        """
+        Remove and return an item from the back of the queue (thread-safe).
+
+        :return: (item, success_flag)
+        """
         self._mutex.lock()
-        # if data available in queue
         if len(self) > 0:
             item = self.pop()
             sucessful = 1

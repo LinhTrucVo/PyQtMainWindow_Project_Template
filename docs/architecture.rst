@@ -1,10 +1,10 @@
 Architecture
-===========
+============
 
 This section provides a detailed overview of the PyQtMainWindow Project Template architecture.
 
 System Overview
--------------
+---------------
 
 The PyQtMainWindow Project Template is designed with a modular architecture that separates concerns and provides a robust foundation for building multi-threaded Qt applications.
 
@@ -13,7 +13,7 @@ The PyQtMainWindow Project Template is designed with a modular architecture that
    :align: center
 
 Component Architecture
---------------------
+----------------------
 
 The system is composed of several key components that work together to provide window management and thread synchronization:
 
@@ -22,7 +22,7 @@ The system is composed of several key components that work together to provide w
    :align: center
 
 Class Structure
--------------
+---------------
 
 The class hierarchy and relationships are shown in the following diagram:
 
@@ -31,7 +31,7 @@ The class hierarchy and relationships are shown in the following diagram:
    :align: center
 
 Thread Management
---------------
+-----------------
 
 The system uses a sophisticated thread management system to handle window creation and communication:
 
@@ -40,7 +40,7 @@ The system uses a sophisticated thread management system to handle window creati
    :align: center
 
 Key Components
-------------
+--------------
 
 1. **Window Management**
    - `Bico_QWindowThread`: Manages window threads and their lifecycle
@@ -58,7 +58,7 @@ Key Components
    - Resource management and cleanup
 
 Design Patterns
--------------
+---------------
 
 The system implements several design patterns:
 
@@ -83,7 +83,7 @@ The system implements several design patterns:
    - Global state management
 
 Thread Safety
------------
+-------------
 
 The system ensures thread safety through:
 
@@ -103,7 +103,7 @@ The system ensures thread safety through:
    - Thread termination
 
 Best Practices
-------------
+--------------
 
 1. **Window Creation**
    - Use the provided factory methods
@@ -123,4 +123,4 @@ Best Practices
 4. **Error Handling**
    - Implement proper error handling
    - Log errors appropriately
-   - Handle thread termination 
+   - Handle thread termination

@@ -2,14 +2,14 @@ Installation
 ============
 
 Requirements
------------
+------------
 
 * Python 3.8 or higher
 * PySide6 or PyQt6
 * Windows 10 or higher (for Windows-specific features)
 
 Installation Steps
-----------------
+------------------
 
 1. Clone the repository:
 
@@ -35,7 +35,7 @@ Installation Steps
 
 .. code-block:: bash
 
-    pip install -r requirements.txt
+   pip install -r requirements.txt
 
 4. Build the project:
 
@@ -48,7 +48,7 @@ Installation Steps
     ./build.sh
 
 Project Structure
----------------
+-----------------
 
 ::
 
@@ -65,7 +65,7 @@ Project Structure
     └── requirements.txt        # Project dependencies
 
 Development Setup
----------------
+-----------------
 
 1. Install development dependencies:
 
@@ -84,7 +84,7 @@ Development Setup
    - For other IDEs, ensure you have Python and Qt development tools installed
 
 Building Documentation
---------------------
+----------------------
 
 To build the documentation locally:
 
@@ -96,7 +96,7 @@ To build the documentation locally:
 The documentation will be available in `docs/_build/html/`.
 
 Troubleshooting
---------------
+---------------
 
 Common issues and solutions:
 
@@ -112,4 +112,4 @@ Common issues and solutions:
 3. **Import errors**
    - Ensure you're using the correct virtual environment
    - Check if all required packages are installed
-   - Verify your PYTHONPATH includes the project root 
+   - Verify your PYTHONPATH includes the project root
