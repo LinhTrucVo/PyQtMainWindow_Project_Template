@@ -1,0 +1,53 @@
+@startuml Component Diagram
+
+skinparam component {
+    BackgroundColor #ECF0F1
+    BorderColor #2C3E50
+    ArrowColor #2C3E50
+    FontName Arial
+    FontSize 12
+    FontStyle bold
+}
+
+title PyQtMainWindow Component Architecture
+
+package "Application" {
+    [Main Application] as main
+    [Window Manager] as wm
+}
+
+package "Core Framework" {
+    [Bico_QThread] as bqt
+    [Bico_QMessData] as bmd
+    [Bico_QWindowThread] as bwt
+    [Bico_QWindowThread_UI] as bwtu
+    [Bico_QMutexQueue] as bmq
+}
+
+package "Client Implementation" {
+    [Custom Windows] as cw
+    [Custom UI Components] as cuic
+}
+
+package "Qt Framework" {
+    [QApplication] as qapp
+    [QMainWindow] as qmw
+    [QThread] as qt
+    [QMutex] as qm
+}
+
+main --> wm : uses
+wm --> bqt : manages
+wm --> bwt : creates
+bwt --> bmq : uses
+bqt --> bmq : uses
+cw --> bwt : extends
+cuic --> bwtu : extends
+
+bqt --> qt : extends
+bwt --> qt : extends
+bwt --> qmw : uses
+bwtu --> qmw : uses
+bmq --> qm : uses
+
+@enduml

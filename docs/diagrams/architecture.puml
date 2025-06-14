@@ -1,0 +1,48 @@
+@startuml PyQtMainWindow_Architecture
+
+skinparam componentStyle rectangle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam defaultFontSize 12
+skinparam roundcorner 20
+skinparam shadowing true
+
+title PyQtMainWindow Project Architecture
+
+package "Application Layer" {
+    [main.py] as main
+    [QApplication] as qapp
+}
+
+package "Core Template" {
+    component Bico_QWindowThread
+    component Bico_QWindowThread_UI
+    component Bico_QMutexQueue
+    component Bico_QThread
+    component Bico_QMessData
+}
+
+package "Client Code" {
+    component Bico_QWindowThread_Sample
+    component Bico_QWindowThread_Sample_UI
+}
+
+main --> qapp : creates
+main --> Bico_QWindowThread : uses
+main --> Bico_QWindowThread_UI : uses
+main --> Bico_QMutexQueue : uses
+main --> Bico_QWindowThread_Sample : uses
+main --> Bico_QWindowThread_Sample_UI : uses
+
+Bico_QWindowThread --> Bico_QThread : inherits
+Bico_QWindowThread --> Bico_QMutexQueue : uses
+Bico_QWindowThread --> Bico_QWindowThread_UI : uses
+Bico_QWindowThread --> Bico_QMessData : uses
+
+Bico_QWindowThread_UI --> Bico_QWindowThread : links
+Bico_QWindowThread_UI --> Bico_QWindowThread_Sample_UI : manages
+
+Bico_QWindowThread_Sample --> Bico_QWindowThread : extends
+Bico_QWindowThread_Sample_UI --> Bico_QWindowThread_UI : extends
+
+@enduml

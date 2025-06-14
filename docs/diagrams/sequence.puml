@@ -1,0 +1,60 @@
+@startuml Window Creation Sequence
+
+skinparam sequence {
+    ArrowColor #2C3E50
+    ActorBorderColor #2C3E50
+    LifeLineBorderColor #2C3E50
+    LifeLineBackgroundColor #ECF0F1
+    ParticipantBorderColor #2C3E50
+    ParticipantBackgroundColor #ECF0F1
+    ParticipantFontName Impact
+    ParticipantFontSize 17
+    ParticipantFontStyle #2C3E50
+    ActorBackgroundColor #ECF0F1
+    ActorFontName Impact
+    ActorFontSize 17
+    ActorFontStyle #2C3E50
+}
+
+title Window Creation and Thread Management Sequence
+
+actor "Main Application" as main
+participant "Window Manager" as wm
+participant "Bico_QWindowThread" as bwt
+participant "Bico_QMutexQueue" as bmq
+participant "Custom Window" as cw
+participant "Bico_QWindowThread_UI" as bwtu
+
+main -> wm: Create Window
+activate wm
+
+wm -> bwt: create(windowClass, inputQueue, outputQueue, threadName)
+activate bwt
+
+bwt -> bmq: Initialize input/output queues
+activate bmq
+bmq --> bwt: Queue instances
+deactivate bmq
+
+bwt -> bwtu: create(windowClass, threadName)
+activate bwtu
+bwtu --> bwt: UI thread instance
+deactivate bwtu
+
+bwt -> cw: Instantiate window
+activate cw
+cw --> bwt: Window instance
+deactivate cw
+
+bwt -> bwt: start()
+activate bwt
+bwt -> cw: show()
+deactivate bwt
+
+bwt --> wm: Thread started
+deactivate bwt
+
+wm --> main: Window created and running
+deactivate wm
+
+@enduml 

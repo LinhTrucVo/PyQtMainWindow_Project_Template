@@ -1,0 +1,92 @@
+@startuml Class Diagram
+
+skinparam class {
+    BackgroundColor #ECF0F1
+    ArrowColor #2C3E50
+    BorderColor #2C3E50
+    FontName Arial
+    FontSize 12
+    FontStyle bold
+}
+
+title PyQtMainWindow Class Relationships
+
+class Bico_QWindowThread {
+    - _mainApp: QApplication
+    - _threadHash: dict
+    - _windowClass: class
+    - _uiThread: Bico_QWindowThread_UI
+    - _window: QMainWindow
+    + setMainApp(app: QApplication)
+    + getThreadHash(): dict
+    + create(windowClass, inputQueue, outputQueue, threadName)
+    + run()
+    + start(priority: QThread.Priority)
+    + getUi(): QMainWindow
+    + setUi(ui: QMainWindow)
+}
+
+class Bico_QMutexQueue {
+    - _queue: list
+    - _mutex: QMutex
+    + put(item: any)
+    + get(): any
+    + peek(): any
+    + size(): int
+    + clear()
+    + isEmpty(): bool
+    + enqueue(item: any)
+    + dequeue(): tuple
+}
+
+class Bico_QWindowThread_UI {
+    - _window: QMainWindow
+    - _thread: Bico_QWindowThread
+    + create(windowClass, threadName)
+    + setWindow(window: QMainWindow)
+    + getWindow(): QMainWindow
+    + setThread(thread: Bico_QWindowThread)
+    + getThread(): Bico_QWindowThread
+}
+
+class Bico_QThread {
+    - _inputQueue: Bico_QMutexQueue
+    - _outputQueue: Bico_QMutexQueue
+    + MainTask()
+    + run()
+    + fromUI(message: str, data: any)
+    + toUI(message: str, data: any)
+}
+
+class Bico_QMessData {
+    - type: str
+    - data: any
+    + __init__(type: str, data: any)
+    + getType(): str
+    + getData(): any
+}
+
+class QMainWindow {
+    + show()
+    + hide()
+    + close()
+}
+
+class QThread {
+    + start(priority: QThread.Priority)
+    + quit()
+    + wait()
+    + finished
+}
+
+Bico_QWindowThread --|> QThread
+Bico_QWindowThread --|> Bico_QThread
+Bico_QWindowThread o-- Bico_QMutexQueue
+Bico_QWindowThread o-- Bico_QWindowThread_UI
+Bico_QWindowThread o-- QMainWindow
+Bico_QThread o-- Bico_QMutexQueue
+Bico_QThread o-- Bico_QMessData
+Bico_QWindowThread_UI o-- QMainWindow
+Bico_QWindowThread_UI o-- Bico_QWindowThread
+
+@enduml 

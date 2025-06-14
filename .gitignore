@@ -1,0 +1,14 @@
+# .gitignore
+#
+# Specifies intentionally untracked files to ignore.
+#
+# - docs/_build/: Sphinx documentation build output
+# - **/__pycache__/: Python bytecode cache directories
+# - build/: Application build output
+# - dist/: Distribution packages
+
+docs/_build/
+**/__pycache__/
+build/
+dist/
+.venv/
