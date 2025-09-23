@@ -24,12 +24,12 @@ or update them:
 git submodule update --remote --recursive
 ```
 
-### Update Submodules
-
-To update the submodules to the latest version from their remote repositories:
+After update submodule:
 
 ```bash
-git submodule update --remote
+git add src/PyQtLib_Project_Template
+git commit -m "updare submodule"
+git push
 ```
 
 ## Submodules
