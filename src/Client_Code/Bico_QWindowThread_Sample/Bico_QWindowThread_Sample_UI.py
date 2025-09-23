@@ -26,9 +26,9 @@ from PySide6.QtWidgets import QApplication
 
 from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object import Example_Data_Object
 from Client_Code.Bico_QWindowThread_Sample.Ui_Bico_QWindowThread_Sample_UI import Ui_Bico_QWindowThread_Sample_UI
-from PyQtLib_Project_Template.src.bico_qwindowthread_ui import Bico_QWindowThread_UI
-from PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
-from PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
+from lib.bico_qwindowthread_ui import Bico_QWindowThread_UI
+from lib.PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
+from lib.PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
 
 
 class Bico_QWindowThread_Sample_UI(Bico_QWindowThread_UI):

@@ -1,3 +1,3 @@
-[submodule "src/PyQtLib_Project_Template"]
-	path = src/PyQtLib_Project_Template
+[submodule "src/lib/PyQtLib_Project_Template"]
+	path = src/lib/PyQtLib_Project_Template
 	url = https://github.com/LinhTrucVo/PyQtLib_Project_Template.git

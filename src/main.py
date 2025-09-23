@@ -22,9 +22,9 @@ creates and starts multiple window threads using the core framework.
 import sys
 from PySide6.QtWidgets import QApplication
 
-from PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
-from PyQtLib_Project_Template.src.bico_qwindowthread import Bico_QWindowThread
-from PyQtLib_Project_Template.src.bico_qwindowthread_ui import Bico_QWindowThread_UI
+from lib.PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
+from lib.bico_qwindowthread import Bico_QWindowThread
+from lib.bico_qwindowthread_ui import Bico_QWindowThread_UI
 from Client_Code.Bico_QWindowThread_Sample.Bico_QWindowThread_Sample import Bico_QWindowThread_Sample
 from Client_Code.Bico_QWindowThread_Sample.Bico_QWindowThread_Sample_UI import Bico_QWindowThread_Sample_UI
 
