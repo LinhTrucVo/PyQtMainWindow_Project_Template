@@ -56,7 +56,7 @@ Project Structure
     ├── docs/                    # Documentation
     ├── src/                     # Source code
     │   ├── Client_Code/        # Client implementation
-    │   └── Template_Material/  # Core template classes
+    │   └── PyQtLib_Project_Template/  # Core template classes
     ├── build/                   # Build output
     ├── dist/                    # Distribution files
     ├── .vscode/                # VS Code configuration

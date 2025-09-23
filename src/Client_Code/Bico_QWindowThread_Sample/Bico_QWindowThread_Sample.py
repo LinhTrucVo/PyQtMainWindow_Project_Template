@@ -17,9 +17,9 @@ Sample implementation of a window thread for demonstration purposes.
 import sys, os
 from PySide6.QtWidgets import QApplication, QPushButton
 
-from Template_Material.bico_qmessdata import Bico_QMessData
-from Template_Material.bico_qmutexqueue import Bico_QMutexQueue
-from Template_Material.bico_qwindowthread import Bico_QWindowThread
+from PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
+from PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
+from PyQtLib_Project_Template.src.bico_qwindowthread import Bico_QWindowThread
 from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object import Example_Data_Object
 
 
@@ -68,14 +68,14 @@ class Bico_QWindowThread_Sample(Bico_QWindowThread):
 
         print("Hello from " + self.objectName())
         print("Num of running thread: " + str(len(Bico_QWindowThread.getThreadHash())))
-        self.msleep(1000)
+        self.msleep(100)
 
         if ((self.objectName() == "task_1") and (Bico_QWindowThread.getThreadHash().get("task_0") != None)):
             self.i += 1
             mess_data = Bico_QMessData("from_another_thread", self.i)
             mess_data.setSrc(self.objectName())
             Bico_QWindowThread.getThreadHash().get("task_0").qinEnqueue(mess_data)
-            self.msleep(2365)
+            self.msleep(236)
 
             # internally delete a thread
             # mess_data = Bico_QMessData("terminate", "")

@@ -7,7 +7,7 @@ Welcome to PyQtMainWindow Project Template's documentation!
 
    installation
    architecture
-   usage
+   usag
    api
    contributing
 
@@ -32,8 +32,8 @@ Quick Start
 .. code-block:: python
 
     from PySide6.QtWidgets import QApplication
-    from Template_Material.bico_qwindowthread import Bico_QWindowThread
-    from Template_Material.bico_qmutexqueue import Bico_QMutexQueue
+    from PyQtLib_Project_Template.src.bico_qwindowthread import Bico_QWindowThread
+    from PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
 
     app = QApplication(sys.argv)
     Bico_QWindowThread.setMainApp(app)

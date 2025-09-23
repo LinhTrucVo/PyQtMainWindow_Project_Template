@@ -4,27 +4,27 @@ API Reference
 Core Template Modules
 ---------------------
 
-.. automodule:: Template_Material.bico_qmessdata
+.. automodule:: PyQtLib_Project_Template.src.bico_qmessdata
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: Template_Material.bico_qmutexqueue
+.. automodule:: PyQtLib_Project_Template.src.bico_qmutexqueue
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: Template_Material.bico_qthread
+.. automodule:: PyQtLib_Project_Template.src.bico_qthread
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: Template_Material.bico_qwindowthread
+.. automodule:: PyQtLib_Project_Template.src.bico_qwindowthread
    :members:
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: Template_Material.bico_qwindowthread_ui
+.. automodule:: PyQtLib_Project_Template.src.bico_qwindowthread_ui
    :members:
    :undoc-members:
    :show-inheritance:

@@ -20,8 +20,8 @@ Here's a basic example of creating a new window:
 .. code-block:: python
 
     from PySide6.QtWidgets import QApplication, QMainWindow
-    from Template_Material.bico_qwindowthread import Bico_QWindowThread
-    from Template_Material.bico_qmutexqueue import Bico_QMutexQueue
+    from PyQtLib_Project_Template.src.bico_qwindowthread import Bico_QWindowThread
+    from PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
 
     class MyWindow(QMainWindow):
         def __init__(self, input_queue, output_queue):
