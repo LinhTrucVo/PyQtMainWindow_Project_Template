@@ -18,6 +18,11 @@ If you already cloned the repository without submodules, initialize them:
 ```bash
 git submodule update --init --recursive
 ```
+or update them:
+
+```bash
+git submodule update --remote --recursive
+```
 
 ### Update Submodules
 
