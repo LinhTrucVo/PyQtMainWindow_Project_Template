@@ -21,9 +21,15 @@ def createTaskCode(src_task_name, dst_task_name):
     dst_folder = os.getcwd() + "/" + dst_task_name
 
     shutil.copytree(src_folder, dst_folder)
+    # Remove __pycache__ directories from destination folder
+    for root, dirs, files in os.walk(dst_folder):
+        if '__pycache__' in dirs:
+            pycache_path = os.path.join(root, '__pycache__')
+            shutil.rmtree(pycache_path)
 
     # Process files recursively in all subdirectories
     for root, dirs, files in os.walk(dst_folder):
+        # Skip __pycache__ directories
         for filename in files:
             print(filename)
             if filename != os.path.basename(__file__):
@@ -55,14 +61,14 @@ def main():
         label_1 = QLabel("Name", win)
         label_1.setGeometry(5, 5, 100, 15)
 
-        line_edit = QLineEdit("", win)
+        line_edit = QLineEdit("Task_1", win)
         line_edit.setGeometry(label_1.x(), label_1.y() + 20, 200, 30)
         line_edit.setCursorPosition(0)
 
         label_2 = QLabel("Copy from", win)
         label_2.setGeometry(label_1.x(), label_1.y() + 70, 300, 15)
 
-        line_edit_1 = QLineEdit("Bico_QUIThread_Sample", win)
+        line_edit_1 = QLineEdit("Bico_QWindowThread_Sample", win)
         line_edit_1.setGeometry(label_1.x(), label_2.y() + 20, 200, 30)
         line_edit_1.setCursorPosition(0)
 
