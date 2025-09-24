@@ -39,3 +39,24 @@ This project uses the following submodules:
 - **PyQtLib_Project_Template**: Core PyQt threading and messaging library
   - Repository: https://github.com/LinhTrucVo/PyQtLib_Project_Template.git
   - Path: `src/PyQtLib_Project_Template`
+
+
+## 📦 Quick Start
+
+```sh
+git clone https://github.com/LinhTrucVo/PyQtQuick_Project_Template.git
+cd PyQtQuick_Project_Template
+# python -m venv .venv
+# .venv\Scripts\activate  # On Windows
+conda create --name PyQtQuick_Project_Template_env python=3.11 -y
+conda activate PyQtQuick_Project_Template_env
+pip install -r venv_requirements.txt
+build.bat
+
+```
+
+## Create submodule
+```sh
+cd src/Client_Code/
+python create_client_code.py
+```

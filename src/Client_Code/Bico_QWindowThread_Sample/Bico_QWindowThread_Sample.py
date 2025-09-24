@@ -18,7 +18,7 @@ from PySide6.QtWidgets import QPushButton
 
 from lib import Bico_QMessData
 from lib import Bico_QWindowThread
-from .Data_Object.Example_Data_Object import Example_Data_Object
+from .Data_Object.Bico_QWindowThread_Sample_Data import Bico_QWindowThread_Sample_Data
 
 
 class Bico_QWindowThread_Sample(Bico_QWindowThread):
@@ -32,7 +32,7 @@ class Bico_QWindowThread_Sample(Bico_QWindowThread):
     """
 
     i = 0
-    ex_data_obj = Example_Data_Object()
+    ex_data_obj = Bico_QWindowThread_Sample_Data()
 
     def MainTask(self):
         """

@@ -42,7 +42,7 @@ Client Implementation Modules
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object
+.. automodule:: Client_Code.Bico_QWindowThread_Sample.Data_Object.Bico_QWindowThread_Sample_Data
    :members:
    :undoc-members:
    :show-inheritance:

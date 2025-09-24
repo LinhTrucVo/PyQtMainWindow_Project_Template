@@ -1,5 +1,5 @@
 """
-Example_Data_Object.py
+Bico_QWindowThread_Sample_Data.py
 ======================
 
 Example data object for demonstration of data passing between threads.
@@ -7,7 +7,7 @@ Example data object for demonstration of data passing between threads.
 .. uml::
 
    @startuml
-   class Example_Data_Object {
+   class Bico_QWindowThread_Sample_Data {
        +getData_1()
        +setData_1(data)
        +getData_2()
@@ -16,7 +16,7 @@ Example data object for demonstration of data passing between threads.
    @enduml
 """
 
-class Example_Data_Object:
+class Bico_QWindowThread_Sample_Data:
     """
     Example data object for use in sample window threads.
 
