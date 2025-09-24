@@ -55,7 +55,7 @@ build.bat
 
 ```
 
-## Create submodule
+## Create Code
 ```sh
 cd src/lib/PyQtLib_Project_Template/tool
 python create_client_code.py
