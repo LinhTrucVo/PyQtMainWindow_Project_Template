@@ -17,8 +17,8 @@ Sample implementation of a window thread for demonstration purposes.
 import sys, os
 from PySide6.QtWidgets import QApplication, QPushButton
 
-from lib.PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
-from lib.PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
+from lib.PyQtLib_Project_Template import Bico_QMessData
+from lib.PyQtLib_Project_Template import Bico_QMutexQueue
 from lib.bico_qwindowthread import Bico_QWindowThread
 from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object import Example_Data_Object
 
