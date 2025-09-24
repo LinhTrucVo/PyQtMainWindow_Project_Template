@@ -60,3 +60,4 @@ build.bat
 cd src/Client_Code/
 python create_client_code.py
 ```
+<img width="267" height="182" alt="image" src="https://github.com/user-attachments/assets/ecff7b35-3675-43ab-aa8b-c486cc464874" />
