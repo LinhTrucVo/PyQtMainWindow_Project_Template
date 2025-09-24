@@ -14,13 +14,11 @@ Sample implementation of a window thread for demonstration purposes.
    @enduml
 """
 
-import sys, os
-from PySide6.QtWidgets import QApplication, QPushButton
+from PySide6.QtWidgets import QPushButton
 
-from lib.PyQtLib_Project_Template import Bico_QMessData
-from lib.PyQtLib_Project_Template import Bico_QMutexQueue
-from lib.bico_qwindowthread import Bico_QWindowThread
-from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object import Example_Data_Object
+from lib import Bico_QMessData
+from lib import Bico_QWindowThread
+from .Data_Object.Example_Data_Object import Example_Data_Object
 
 
 class Bico_QWindowThread_Sample(Bico_QWindowThread):

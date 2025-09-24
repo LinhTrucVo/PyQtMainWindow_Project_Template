@@ -19,15 +19,8 @@ Defines the Bico_QWindowThread_UI class, a base class for UI logic associated wi
    @enduml
 """
 
-import sys
-import os
-
 from PySide6.QtCore import QMutex, Signal, Slot
-from PySide6.QtWidgets import QApplication, QMainWindow
-
-from .bico_qwindowthread import Bico_QWindowThread
-from .PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
-from .PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
+from PySide6.QtWidgets import QMainWindow
 
 
 class Bico_QWindowThread_UI(QMainWindow):

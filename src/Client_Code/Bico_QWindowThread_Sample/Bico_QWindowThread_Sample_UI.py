@@ -18,17 +18,10 @@ Sample UI implementation for a window thread.
    @enduml
 """
 
-import sys
-import os
-
 from PySide6.QtCore import QSize, Slot
-from PySide6.QtWidgets import QApplication
 
-from Client_Code.Bico_QWindowThread_Sample.Data_Object.Example_Data_Object import Example_Data_Object
-from Client_Code.Bico_QWindowThread_Sample.Ui_Bico_QWindowThread_Sample_UI import Ui_Bico_QWindowThread_Sample_UI
-from lib.bico_qwindowthread_ui import Bico_QWindowThread_UI
-from lib.PyQtLib_Project_Template import Bico_QMutexQueue
-from lib.PyQtLib_Project_Template import Bico_QMessData
+from lib import Bico_QWindowThread_UI
+from .Ui_Bico_QWindowThread_Sample_UI import Ui_Bico_QWindowThread_Sample_UI
 
 
 class Bico_QWindowThread_Sample_UI(Bico_QWindowThread_UI):

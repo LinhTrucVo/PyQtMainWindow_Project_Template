@@ -20,15 +20,10 @@ Defines the Bico_QWindowThread class, which manages a worker thread with input/o
    @enduml
 """
 
-import sys
-import os
-
 from PySide6.QtCore import QThread, QMutex, Signal, Slot
-from PySide6.QtWidgets import QApplication
 
-from .PyQtLib_Project_Template.src.bico_qthread import Bico_QThread
-from .PyQtLib_Project_Template.src.bico_qmutexqueue import Bico_QMutexQueue
-from .PyQtLib_Project_Template.src.bico_qmessdata import Bico_QMessData
+from .PyQtLib_Project_Template import Bico_QThread
+from .PyQtLib_Project_Template import Bico_QMessData
 
 class Bico_QWindowThread(QThread, Bico_QThread):
     """
