@@ -1,1 +1,0 @@
-pyside6-uic Task_1_UI.ui -o Ui_Task_1_UI.py

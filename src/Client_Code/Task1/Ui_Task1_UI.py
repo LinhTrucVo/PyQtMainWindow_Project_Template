@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'Task_1_UI.ui'
+## Form generated from reading UI file 'Task1_UI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.3
+## Created by: Qt User Interface Compiler version 6.9.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -18,17 +18,12 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenuBar, QPushButton,
     QSizePolicy, QStatusBar, QWidget)
 
-"""
-Ui_Task_1_UI module.
-Auto-generated UI class for the sample window UI.
-"""
-
-class Ui_Task_1_UI(object):
-    def setupUi(self, Task_1_UI):
-        if not Task_1_UI.objectName():
-            Task_1_UI.setObjectName(u"Task_1_UI")
-        Task_1_UI.resize(474, 334)
-        self.centralwidget = QWidget(Task_1_UI)
+class Ui_Task1_UI(object):
+    def setupUi(self, Task1_UI):
+        if not Task1_UI.objectName():
+            Task1_UI.setObjectName(u"Task1_UI")
+        Task1_UI.resize(474, 334)
+        self.centralwidget = QWidget(Task1_UI)
         self.centralwidget.setObjectName(u"centralwidget")
         self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setObjectName(u"pushButton")
@@ -39,24 +34,24 @@ class Ui_Task_1_UI(object):
         self.pushButton_3 = QPushButton(self.centralwidget)
         self.pushButton_3.setObjectName(u"pushButton_3")
         self.pushButton_3.setGeometry(QRect(190, 200, 81, 41))
-        Task_1_UI.setCentralWidget(self.centralwidget)
-        self.menubar = QMenuBar(Task_1_UI)
+        Task1_UI.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(Task1_UI)
         self.menubar.setObjectName(u"menubar")
         self.menubar.setGeometry(QRect(0, 0, 474, 22))
-        Task_1_UI.setMenuBar(self.menubar)
-        self.statusbar = QStatusBar(Task_1_UI)
+        Task1_UI.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(Task1_UI)
         self.statusbar.setObjectName(u"statusbar")
-        Task_1_UI.setStatusBar(self.statusbar)
+        Task1_UI.setStatusBar(self.statusbar)
 
-        self.retranslateUi(Task_1_UI)
+        self.retranslateUi(Task1_UI)
 
-        QMetaObject.connectSlotsByName(Task_1_UI)
+        QMetaObject.connectSlotsByName(Task1_UI)
     # setupUi
 
-    def retranslateUi(self, Task_1_UI):
-        Task_1_UI.setWindowTitle(QCoreApplication.translate("Task_1_UI", u"Bico_QWidgetThread_UI_Example", None))
-        self.pushButton.setText(QCoreApplication.translate("Task_1_UI", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Task_1_UI", u"1", None))
-        self.pushButton_3.setText(QCoreApplication.translate("Task_1_UI", u"2", None))
+    def retranslateUi(self, Task1_UI):
+        Task1_UI.setWindowTitle(QCoreApplication.translate("Task1_UI", u"Bico_QWidgetThread_UI_Example", None))
+        self.pushButton.setText(QCoreApplication.translate("Task1_UI", u"PushButton", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Task1_UI", u"1", None))
+        self.pushButton_3.setText(QCoreApplication.translate("Task1_UI", u"2", None))
     # retranslateUi
 

@@ -1,5 +1,5 @@
 """
-Task_1_Data.py
+Task1_Data.py
 ======================
 
 Example data object for demonstration of data passing between threads.
@@ -7,7 +7,7 @@ Example data object for demonstration of data passing between threads.
 .. uml::
 
    @startuml
-   class Task_1_Data {
+   class Task1_Data {
        +getData_1()
        +setData_1(data)
        +getData_2()
@@ -16,7 +16,7 @@ Example data object for demonstration of data passing between threads.
    @enduml
 """
 
-class Task_1_Data:
+class Task1_Data:
     """
     Example data object for use in sample window threads.
 

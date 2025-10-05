@@ -1,1 +1,0 @@
-pyside6-uic Bico_QWindowThread_Sample_UI.ui -o Ui_Bico_QWindowThread_Sample_UI.py

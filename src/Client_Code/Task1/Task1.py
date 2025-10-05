@@ -1,5 +1,5 @@
 """
-Bico_QWindowThread_Sample.py
+Task1.py
 ============================
 
 Sample implementation of a window thread for demonstration purposes.
@@ -7,10 +7,10 @@ Sample implementation of a window thread for demonstration purposes.
 .. uml::
 
    @startuml
-   class Bico_QWindowThread_Sample {
+   class Task1 {
        +MainTask()
    }
-   Bico_QWindowThread_Sample --|> Bico_QWindowThread
+   Task1 --|> Bico_QWindowThread
    @enduml
 """
 
@@ -18,10 +18,10 @@ from PySide6.QtWidgets import QPushButton
 
 from lib import Bico_QMessData
 from lib import Bico_QWindowThread
-from .Data_Object.Bico_QWindowThread_Sample_Data import Bico_QWindowThread_Sample_Data
+from .Data_Object.Task1_Data import Task1_Data
 
 
-class Bico_QWindowThread_Sample(Bico_QWindowThread):
+class Task1(Bico_QWindowThread):
     """
     Example subclass of Bico_QWindowThread for demonstration.
 
@@ -32,7 +32,7 @@ class Bico_QWindowThread_Sample(Bico_QWindowThread):
     """
 
     i = 0
-    ex_data_obj = Bico_QWindowThread_Sample_Data()
+    ex_data_obj = Task1_Data()
 
     def MainTask(self):
         """

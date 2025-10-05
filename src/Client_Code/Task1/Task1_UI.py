@@ -1,5 +1,5 @@
 """
-Task_1_UI.py
+Task1_UI.py
 ===============================
 
 Sample UI implementation for a window thread.
@@ -7,24 +7,24 @@ Sample UI implementation for a window thread.
 .. uml::
 
    @startuml
-   class Task_1_UI {
+   class Task1_UI {
        +moreUISetup()
        +fromThreadHandling(mess, data)
        +on_pushButton_clicked()
        +on_pushButton_2_clicked()
        +on_pushButton_3_clicked()
    }
-   Task_1_UI --|> Bico_QWindowThread_UI
+   Task1_UI --|> Bico_QWindowThread_UI
    @enduml
 """
 
 from PySide6.QtCore import QSize, Slot
 
 from lib import Bico_QWindowThread_UI
-from .Ui_Task_1_UI import Ui_Task_1_UI
+from .Ui_Task1_UI import Ui_Task1_UI
 
 
-class Task_1_UI(Bico_QWindowThread_UI):
+class Task1_UI(Bico_QWindowThread_UI):
     """
     Example subclass of Bico_QWindowThread_UI for demonstration.
 
@@ -40,7 +40,7 @@ class Task_1_UI(Bico_QWindowThread_UI):
         :param parent: Parent widget.
         """
         Bico_QWindowThread_UI.__init__(self, obj_name, thread, parent)
-        self.ui = Ui_Task_1_UI()
+        self.ui = Ui_Task1_UI()
         self.ui.setupUi(self)
         self.moreUISetup()
 
