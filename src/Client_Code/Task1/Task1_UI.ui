@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>160</x>
       <y>50</y>
       <width>81</width>
       <height>41</height>
@@ -30,27 +30,27 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>160</x>
       <y>130</y>
-      <width>81</width>
+      <width>131</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>1</string>
+     <string>Create another App</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>160</x>
       <y>200</y>
-      <width>81</width>
+      <width>131</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>2</string>
+     <string>Create child App</string>
     </property>
    </widget>
   </widget>
@@ -60,7 +60,7 @@
      <x>0</x>
      <y>0</y>
      <width>474</width>
-     <height>22</height>
+     <height>33</height>
     </rect>
    </property>
   </widget>

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'Task1_UI.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.9.3
+## Created by: Qt User Interface Compiler version 6.10.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -27,17 +27,17 @@ class Ui_Task1_UI(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(190, 50, 81, 41))
+        self.pushButton.setGeometry(QRect(160, 50, 81, 41))
         self.pushButton_2 = QPushButton(self.centralwidget)
         self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setGeometry(QRect(190, 130, 81, 41))
+        self.pushButton_2.setGeometry(QRect(160, 130, 131, 41))
         self.pushButton_3 = QPushButton(self.centralwidget)
         self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(190, 200, 81, 41))
+        self.pushButton_3.setGeometry(QRect(160, 200, 131, 41))
         Task1_UI.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(Task1_UI)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 474, 22))
+        self.menubar.setGeometry(QRect(0, 0, 474, 33))
         Task1_UI.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(Task1_UI)
         self.statusbar.setObjectName(u"statusbar")
@@ -51,7 +51,7 @@ class Ui_Task1_UI(object):
     def retranslateUi(self, Task1_UI):
         Task1_UI.setWindowTitle(QCoreApplication.translate("Task1_UI", u"Bico_QWidgetThread_UI_Example", None))
         self.pushButton.setText(QCoreApplication.translate("Task1_UI", u"PushButton", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Task1_UI", u"1", None))
-        self.pushButton_3.setText(QCoreApplication.translate("Task1_UI", u"2", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Task1_UI", u"Create another App", None))
+        self.pushButton_3.setText(QCoreApplication.translate("Task1_UI", u"Create child App", None))
     # retranslateUi
 

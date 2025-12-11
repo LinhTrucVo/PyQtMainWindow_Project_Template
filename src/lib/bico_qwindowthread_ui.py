@@ -77,15 +77,6 @@ class Bico_QWindowThread_UI(QMainWindow):
             if (self._thread.isRunning() == False):
                 self._thread.start()
 
-    def closeEvent(self, event):
-        """
-        Handle the window close event by requesting thread termination.
-
-        :param event: QCloseEvent
-        """
-        event.ignore()
-        self.toThread.emit("terminate", "")
-
     def create(custom_class=None, obj_name="", thread=None, parent=None):
         """
         Factory method to create and register a new UI instance.

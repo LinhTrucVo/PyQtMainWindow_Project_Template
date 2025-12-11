@@ -122,19 +122,6 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         else:
             return None
 
-    def remove(obj_name=""):
-        """
-        Request termination of a thread by name.
-
-        :param obj_name: Name of the thread to remove.
-        :return: 1 if removed, 0 if not found.
-        """
-        if (__class__.thread_hash.get(obj_name) != None):
-            mess_data = Bico_QMessData("terminate", "")
-            __class__.thread_hash[obj_name].qinEnqueue(mess_data)
-            return 1
-        return 0
-
     def getThreadHash():
         """
         Get the dictionary of all registered threads.

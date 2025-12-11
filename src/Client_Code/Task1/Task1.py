@@ -19,6 +19,7 @@ from PySide6.QtWidgets import QPushButton
 from lib import Bico_QMessData
 from lib import Bico_QWindowThread
 from .Data_Object.Task1_Data import Task1_Data
+import random
 
 
 class Task1(Bico_QWindowThread):
@@ -51,22 +52,19 @@ class Task1(Bico_QWindowThread):
             data = input.data()
             if (mess == "terminate"):     
                 continue_to_run = 0
-            elif (mess == "num1"):
-                print(self.objectName() + " " + mess + " " + str(self.ex_data_obj.getData_1()))
-            elif (mess == "num2"):
-                print(self.objectName() + " " + mess + " " + str(self.ex_data_obj.getData_2()))
-            elif (mess == "text"):
-                print(self.objectName() + " " + mess + " " + data)
-                self.getChildWidget(QPushButton, "pushButton_4").setText("44")
-            elif (mess == "size"):
-                print(self.objectName() + " " + mess + " " + str(data.width()) + " " + str(data.height()))
-                self.getChildWidget(QPushButton, "pushButton_5").setText("55")
+            elif (mess == "mess_from_ui"):
+                print("From UI: " + self.objectName() + " " + mess + " " + str(data))
+                self.toUI.emit("change_button_text", str(random.randint(0, 2147483647)))
+            elif (mess == "create"):
+                print(self.objectName() + " " + mess + " ")
+            elif (mess == "create_child"):
+                print(self.objectName() + " " + mess + " ")
             elif (mess == "from_another_thread"):
                 print(self.objectName() + " " + mess + ": "  + input.src() + " - " + str(data))
 
         print("Hello from " + self.objectName())
         print("Num of running thread: " + str(len(Bico_QWindowThread.getThreadHash())))
-        self.msleep(100)
+        self.msleep(1000)
 
         if ((self.objectName() == "task_1") and (Bico_QWindowThread.getThreadHash().get("task_0") != None)):
             self.i += 1

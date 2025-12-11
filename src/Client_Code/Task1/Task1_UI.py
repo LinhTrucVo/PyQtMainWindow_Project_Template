@@ -44,6 +44,15 @@ class Task1_UI(Bico_QWindowThread_UI):
         self.ui.setupUi(self)
         self.moreUISetup()
 
+    def closeEvent(self, event):
+        """
+        Handle the window close event by requesting thread termination.
+
+        :param event: QCloseEvent
+        """
+        event.ignore()
+        self.toThread.emit("terminate", "")
+
     def moreUISetup(self):
         """
         Additional UI setup logic.
@@ -78,11 +87,11 @@ class Task1_UI(Bico_QWindowThread_UI):
         """
         Handler for the second push button click event.
         """
-        self.toThread.emit("num1", "111")
+        self.toThread.emit("create", "")
 
     @Slot()
     def on_pushButton_3_clicked(self):
         """
         Handler for the third push button click event.
         """
-        self.toThread.emit("num2", "222")
+        self.toThread.emit("create_child", "")
