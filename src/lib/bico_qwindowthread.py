@@ -50,7 +50,6 @@ class ThreadFactory(QObject):
         
         # Create thread directly (we're already in main thread)
         self.created_thread = custom_class(qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
-        print(f"Created thread: {obj_name}")
         
         # Clear pending params
         self.pending_params = None
