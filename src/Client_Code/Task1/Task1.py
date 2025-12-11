@@ -68,8 +68,8 @@ class Task1(Bico_QWindowThread):
                     1,
                     Bico_QMutexQueue(),
                     1,
-                    thread_name
-                    # Bico_QWindowThread_UI.create(Task1_UI, thread_name)
+                    thread_name,
+                    Bico_QWindowThread_UI.create(Task1_UI, thread_name)
                 )
                 Bico_QWindowThread.getThreadHash()[thread_name].start()
             elif (mess == "create_child"):

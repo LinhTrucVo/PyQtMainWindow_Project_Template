@@ -57,8 +57,24 @@ class ThreadFactory(QObject):
         return self.created_thread
 
 
-# Global thread factory instance (lives in main thread)
+class UIShower(QObject):
+    """Helper class to show UI widgets in the main thread."""
+    
+    def __init__(self):
+        super().__init__()
+        self.pending_ui = None
+    
+    @Slot()
+    def showUI(self):
+        """Show a UI widget in the main thread."""
+        if self.pending_ui is not None and self.pending_ui.isHidden():
+            self.pending_ui.show()
+            self.pending_ui = None
+
+
+# Global instances (live in main thread)
 thread_factory = ThreadFactory()
+ui_shower = UIShower()
 
 class Bico_QWindowThread(QThread, Bico_QThread):
     """
@@ -98,6 +114,8 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         __class__.thread_hash_mutex.unlock()
         self.finished.connect(lambda: __class__.selfRemove(obj_name))
         
+        
+        print("Thread Init.......................")
         self._ui = ui
         if (self._ui != None):
             if self._ui.getThread() == None:
@@ -120,9 +138,28 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         :param priority: Thread priority.
         """
         QThread.start(self, priority)
+        print("Thread START.......................")
         if (self._ui != None):
             if (self._ui.isHidden()):
-                self._ui.show()
+                print("UI SHOW.......................")
+                
+                # Check if we're in the main thread
+                main_thread = QCoreApplication.instance().thread()
+                current_thread = QThread.currentThread()
+                
+                if current_thread == main_thread:
+                    # We're in main thread, show directly
+                    self._ui.show()
+                else:
+                    # We're in a worker thread, use QMetaObject.invokeMethod to show in main thread
+                    ui_shower.pending_ui = self._ui
+                    QMetaObject.invokeMethod(
+                        ui_shower,
+                        "showUI",
+                        Qt.BlockingQueuedConnection
+                    )
+                
+                print("UI SHOWN.......................")
 
     def MainTask(self):
         """
@@ -170,6 +207,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         else:
             # We're in a worker thread, use QMetaObject.invokeMethod to create in main thread
             # Store parameters in the factory object first (avoids Q_ARG type issues)
+            print("Start Creating Thread in main thread...")
             thread_factory.created_thread = None
             thread_factory.pending_params = (custom_class, qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
             
@@ -180,7 +218,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
                 "createThread",
                 Qt.BlockingQueuedConnection
             )
-            
+            print("End Creating Thread in main thread...")
             # Return the created thread
             return thread_factory.created_thread
 
