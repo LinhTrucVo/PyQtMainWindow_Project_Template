@@ -18,7 +18,10 @@ from PySide6.QtWidgets import QPushButton
 
 from lib import Bico_QMessData
 from lib import Bico_QWindowThread
+from lib import Bico_QMutexQueue
+from lib import Bico_QWindowThread_UI
 from .Data_Object.Task1_Data import Task1_Data
+from .Task1_UI import Task1_UI
 import random
 
 
@@ -57,6 +60,18 @@ class Task1(Bico_QWindowThread):
                 self.toUI.emit("change_button_text", str(random.randint(0, 2147483647)))
             elif (mess == "create"):
                 print(self.objectName() + " " + mess + " ")
+                # Create and start two window threads with their UIs
+                thread_name = "task_" + str(random.randint(1000, 9999))
+                Bico_QWindowThread.create(
+                    Task1,
+                    Bico_QMutexQueue(),
+                    1,
+                    Bico_QMutexQueue(),
+                    1,
+                    thread_name,
+                    Bico_QWindowThread_UI.create(Task1_UI, thread_name)
+                )
+                Bico_QWindowThread.getThreadHash()[thread_name].start()
             elif (mess == "create_child"):
                 print(self.objectName() + " " + mess + " ")
             elif (mess == "from_another_thread"):

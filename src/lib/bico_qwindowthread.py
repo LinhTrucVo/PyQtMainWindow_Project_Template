@@ -20,10 +20,46 @@ Defines the Bico_QWindowThread class, which manages a worker thread with input/o
    @enduml
 """
 
-from PySide6.QtCore import QThread, QMutex, Signal, Slot
+from PySide6.QtCore import QThread, QMutex, Signal, Slot, QObject, QMetaObject, Qt, Q_ARG
+from PySide6.QtCore import QCoreApplication
 
 from .PyQtLib_Project_Template import Bico_QThread
 from .PyQtLib_Project_Template import Bico_QMessData
+from .PyQtLib_Project_Template import Bico_QMutexQueue
+
+
+class ThreadFactory(QObject):
+    """Helper class that lives in the main thread to create new threads safely."""
+    
+    def __init__(self):
+        super().__init__()
+        self.created_thread = None  # Store the last created thread for BlockingQueuedConnection
+        self.pending_params = None  # Store parameters to avoid Q_ARG issues
+    
+    @Slot()
+    def createThread(self):
+        """
+        Create a new thread in the main thread using pending parameters.
+        This slot takes no arguments to avoid Q_ARG type issues.
+        Parameters are stored in self.pending_params before calling.
+        """
+        if self.pending_params is None:
+            return
+        
+        custom_class, qin, qin_owner, qout, qout_owner, obj_name, ui, parent = self.pending_params
+        
+        # Create thread directly (we're already in main thread)
+        self.created_thread = custom_class(qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
+        print(f"Created thread: {obj_name}")
+        
+        # Clear pending params
+        self.pending_params = None
+        
+        return self.created_thread
+
+
+# Global thread factory instance (lives in main thread)
+thread_factory = ThreadFactory()
 
 class Bico_QWindowThread(QThread, Bico_QThread):
     """
@@ -40,6 +76,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
     thread_hash = {}
     thread_hash_mutex = QMutex()
     main_app = None
+    thread_factory = None
     toUI = Signal(str, "QVariant")
 
     def __init__(self, qin=None, qin_owner=0, qout=None, qout_owner=0, obj_name="", ui=None, parent=None):
@@ -61,6 +98,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         __class__.thread_hash[obj_name] = self
         __class__.thread_hash_mutex.unlock()
         self.finished.connect(lambda: __class__.selfRemove(obj_name))
+        
         self._ui = ui
         if (self._ui != None):
             if self._ui.getThread() == None:
@@ -106,6 +144,8 @@ class Bico_QWindowThread(QThread, Bico_QThread):
     def create(custom_class=None, qin=None, qin_owner=0, qout=None, qout_owner=0, obj_name="", ui=None, parent=None):
         """
         Factory method to create and register a new thread.
+        Automatically handles thread-safety by using QMetaObject.invokeMethod 
+        to create in main thread when called from a worker thread.
 
         :param custom_class: The thread class to instantiate.
         :param qin: Input queue.
@@ -117,10 +157,33 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         :param parent: Parent QObject.
         :return: Thread instance or None if already exists.
         """
-        if (__class__.thread_hash.get(obj_name) == None):
+        
+        if (__class__.thread_hash.get(obj_name) != None):
+            return None
+        
+        # Check if we're in the main thread
+        main_thread = QCoreApplication.instance().thread()
+        current_thread = QThread.currentThread()
+        
+        if current_thread == main_thread:
+            # We're in the main thread, create directly
             return custom_class(qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
         else:
-            return None
+            # We're in a worker thread, use QMetaObject.invokeMethod to create in main thread
+            # Store parameters in the factory object first (avoids Q_ARG type issues)
+            thread_factory.created_thread = None
+            thread_factory.pending_params = (custom_class, qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
+            
+            # Use BlockingQueuedConnection to wait for the thread to be created
+            # Call with no arguments - parameters are already stored
+            QMetaObject.invokeMethod(
+                thread_factory,
+                "createThread",
+                Qt.BlockingQueuedConnection
+            )
+            
+            # Return the created thread
+            return thread_factory.created_thread
 
     def getThreadHash():
         """
