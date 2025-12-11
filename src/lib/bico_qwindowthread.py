@@ -271,8 +271,9 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         """
         if (__class__.thread_hash.get(obj_name)._ui != None):
             __class__.thread_hash.get(obj_name)._ui.setThread(None)
+            __class__.thread_hash.get(obj_name)._ui.TERMINATE.emit()
             __class__.thread_hash.get(obj_name)._ui = None
-            __class__.thread_hash.get(obj_name).toUI.emit("terminate", "")
+            
         __class__.thread_hash_mutex.lock()
         __class__.thread_hash.pop(obj_name)
         __class__.thread_hash_mutex.unlock()

@@ -70,8 +70,6 @@ class Task1_UI(Bico_QWindowThread_UI):
             self.show()
         elif (mess == "hide"):
             self.hide()
-        elif (mess == "terminate"):
-            self.TERMINATE.emit()
         elif (mess == "change_button_text"):
             self.ui.pushButton.setText(data)
 

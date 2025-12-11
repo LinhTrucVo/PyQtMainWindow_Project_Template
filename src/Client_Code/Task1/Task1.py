@@ -38,6 +38,22 @@ class Task1(Bico_QWindowThread):
     i = 0
     ex_data_obj = Task1_Data()
 
+    def cleanupChildren(self):
+        """
+        Cleanup child threads before this thread is destroyed.
+        """
+        # Get all children from this QObject's children() and terminate them
+        child_list = self.children()
+        for child in child_list:
+            thread = child
+            mess_data = Bico_QMessData("terminate", "")
+            print("delete ------------------" + thread.objectName())
+            thread.qinEnqueue(mess_data)
+            
+            # # Wait for child thread to finish
+            # if thread.isRunning():
+            #     thread.wait(5000)  # Wait up to 5 seconds
+
     def MainTask(self):
         """
         Main logic for the sample window thread.
@@ -55,6 +71,7 @@ class Task1(Bico_QWindowThread):
             data = input.data()
             if (mess == "terminate"):     
                 continue_to_run = 0
+                self.cleanupChildren()
             elif (mess == "mess_from_ui"):
                 print("From UI: " + self.objectName() + " " + mess + " " + str(data))
                 self.toUI.emit("change_button_text", str(random.randint(0, 2147483647)))
@@ -74,6 +91,19 @@ class Task1(Bico_QWindowThread):
                 Bico_QWindowThread.getThreadHash()[thread_name].start()
             elif (mess == "create_child"):
                 print(self.objectName() + " " + mess + " ")
+                # Create and start two window threads with their UIs
+                thread_name = "task_" + str(random.randint(1000, 9999))
+                Bico_QWindowThread.create(
+                    Task1,
+                    Bico_QMutexQueue(),
+                    1,
+                    Bico_QMutexQueue(),
+                    1,
+                    thread_name,
+                    Bico_QWindowThread_UI.create(Task1_UI, thread_name),
+                    self
+                )
+                Bico_QWindowThread.getThreadHash()[thread_name].start()
             elif (mess == "from_another_thread"):
                 print(self.objectName() + " " + mess + ": "  + input.src() + " - " + str(data))
 
