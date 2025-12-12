@@ -45,7 +45,6 @@ class UIFactory(QObject):
         
         # Create UI directly (we're already in main thread)
         self.created_ui = custom_class(obj_name, thread, parent)
-        print(f"Created UI: {obj_name}")
         
         # Clear pending params
         self.pending_params = None
@@ -140,13 +139,11 @@ class Bico_QWindowThread_UI(QMainWindow):
             
             # Use BlockingQueuedConnection to wait for the UI to be created
             # Call with no arguments - parameters are already stored
-            print("Start Creating UI in main thread...")
             QMetaObject.invokeMethod(
                 ui_factory,
                 "createUI",
                 Qt.BlockingQueuedConnection
             )
-            print("End Creating UI in main thread...")
             
             # Return the created UI
             return ui_factory.created_ui

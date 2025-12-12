@@ -48,7 +48,6 @@ class Task1(Bico_QWindowThread):
         for child in child_list:
             thread = child
             mess_data = Bico_QMessData("terminate", "")
-            print("delete ------------------" + thread.objectName())
             thread.qinEnqueue(mess_data)
             
             # Wait for child thread to finish
