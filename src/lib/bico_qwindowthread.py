@@ -275,7 +275,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
             __class__.thread_hash.get(obj_name)._ui = None
             
         __class__.thread_hash_mutex.lock()
-        __class__.thread_hash.pop(obj_name)
+        __class__.thread_hash.pop(obj_name).deleteLater()
         __class__.thread_hash_mutex.unlock()
 
     @Slot(str, "QVariant")

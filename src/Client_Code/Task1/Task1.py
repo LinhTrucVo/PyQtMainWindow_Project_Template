@@ -37,6 +37,7 @@ class Task1(Bico_QWindowThread):
 
     i = 0
     ex_data_obj = Task1_Data()
+    count = 0
 
     def cleanupChildren(self):
         """
@@ -50,9 +51,9 @@ class Task1(Bico_QWindowThread):
             print("delete ------------------" + thread.objectName())
             thread.qinEnqueue(mess_data)
             
-            # # Wait for child thread to finish
-            # if thread.isRunning():
-            #     thread.wait(5000)  # Wait up to 5 seconds
+            # Wait for child thread to finish
+            if thread.isRunning():
+                thread.wait(5000)  # Wait up to 5 seconds
 
     def MainTask(self):
         """
@@ -78,7 +79,8 @@ class Task1(Bico_QWindowThread):
             elif (mess == "create"):
                 print(self.objectName() + " " + mess + " ")
                 # Create and start two window threads with their UIs
-                thread_name = "task_" + str(random.randint(1000, 9999))
+                __class__.count=__class__.count+1
+                thread_name = "task_" + str(__class__.count)
                 Bico_QWindowThread.create(
                     Task1,
                     Bico_QMutexQueue(),
@@ -92,7 +94,8 @@ class Task1(Bico_QWindowThread):
             elif (mess == "create_child"):
                 print(self.objectName() + " " + mess + " ")
                 # Create and start two window threads with their UIs
-                thread_name = "task_" + str(random.randint(1000, 9999))
+                __class__.count=__class__.count+1
+                thread_name = "child_task_" + str(__class__.count)
                 Bico_QWindowThread.create(
                     Task1,
                     Bico_QMutexQueue(),
@@ -109,7 +112,8 @@ class Task1(Bico_QWindowThread):
 
         print("Hello from " + self.objectName())
         print("Num of running thread: " + str(len(Bico_QWindowThread.getThreadHash())))
-        self.msleep(1000)
+        print("Num of running UI: " + str(len(Bico_QWindowThread_UI.getUIThreadHash())))
+        self.msleep(100)
 
         if ((self.objectName() == "task_1") and (Bico_QWindowThread.getThreadHash().get("task_0") != None)):
             self.i += 1
