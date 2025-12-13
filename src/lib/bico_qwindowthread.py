@@ -72,10 +72,6 @@ class UIShower(QObject):
             self.pending_ui = None
 
 
-# Global instances (live in main thread)
-thread_factory = ThreadFactory()
-ui_shower = UIShower()
-
 class Bico_QWindowThread(QThread, Bico_QThread):
     """
     Worker thread class for window logic and communication.
@@ -91,7 +87,8 @@ class Bico_QWindowThread(QThread, Bico_QThread):
     thread_hash = {}
     thread_hash_mutex = QMutex()
     main_app = None
-    thread_factory = None
+    _thread_factory = None
+    _ui_shower = None
     toUI = Signal(str, "QVariant")
 
     def __init__(self, qin=None, qin_owner=0, qout=None, qout_owner=0, obj_name="", ui=None, parent=None):
@@ -147,6 +144,7 @@ class Bico_QWindowThread(QThread, Bico_QThread):
                     self._ui.show()
                 else:
                     # We're in a worker thread, use QMetaObject.invokeMethod to show in main thread
+                    ui_shower = Bico_QWindowThread.getUIShower()
                     ui_shower.pending_ui = self._ui
                     QMetaObject.invokeMethod(
                         ui_shower,
@@ -200,18 +198,19 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         else:
             # We're in a worker thread, use QMetaObject.invokeMethod to create in main thread
             # Store parameters in the factory object first (avoids Q_ARG type issues)
-            thread_factory.created_thread = None
-            thread_factory.pending_params = (custom_class, qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
+            factory = Bico_QWindowThread.getThreadFactory()
+            factory.created_thread = None
+            factory.pending_params = (custom_class, qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
             
             # Use BlockingQueuedConnection to wait for the thread to be created
             # Call with no arguments - parameters are already stored
             QMetaObject.invokeMethod(
-                thread_factory,
+                factory,
                 "createThread",
                 Qt.BlockingQueuedConnection
             )
             # Return the created thread
-            return thread_factory.created_thread
+            return factory.created_thread
 
     def getThreadHash():
         """
@@ -236,6 +235,35 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         :param app: QApplication instance.
         """
         __class__.main_app = app
+
+    @staticmethod
+    def initializeFactories():
+        """
+        Initialize global factory instances in the main thread.
+        This MUST be called from the main thread before any worker threads are created.
+        """
+        if Bico_QWindowThread._thread_factory is None:
+            Bico_QWindowThread._thread_factory = ThreadFactory()
+        if Bico_QWindowThread._ui_shower is None:
+            Bico_QWindowThread._ui_shower = UIShower()
+
+    @staticmethod
+    def getThreadFactory():
+        """
+        Get the thread factory instance.
+
+        :return: ThreadFactory instance.
+        """
+        return Bico_QWindowThread._thread_factory
+
+    @staticmethod
+    def getUIShower():
+        """
+        Get the UI shower instance.
+
+        :return: UIShower instance.
+        """
+        return Bico_QWindowThread._ui_shower
 
     def getUi(self):
         """

@@ -34,6 +34,10 @@ if __name__ == "__main__":
 
     # Register the main application with the thread manager
     Bico_QWindowThread.setMainApp(app)
+    
+    # Initialize factories in main thread to ensure thread safety
+    Bico_QWindowThread.initializeFactories()
+    Bico_QWindowThread_UI.initializeFactory()
 
 # -------------------------------------------------------------------
     # Create and start two window threads with their UIs

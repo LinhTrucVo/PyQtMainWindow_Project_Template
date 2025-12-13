@@ -52,9 +52,6 @@ class UIFactory(QObject):
         return self.created_ui
 
 
-# Global UI factory instance (lives in main thread)
-ui_factory = UIFactory()
-
 class Bico_QWindowThread_UI(QMainWindow):
     """
     Base class for window UI logic in a threaded application.
@@ -70,6 +67,7 @@ class Bico_QWindowThread_UI(QMainWindow):
     UI_NAME_PREFIX = "ui_"
     ui_thread_hash = {}
     ui_thread_hash_mutex = QMutex()
+    _ui_factory = None
     toThread = Signal(str, "QVariant")
     TERMINATE = Signal()
 
@@ -134,19 +132,38 @@ class Bico_QWindowThread_UI(QMainWindow):
         else:
             # We're in a worker thread, use QMetaObject.invokeMethod to create in main thread
             # Store parameters in the factory object first (avoids Q_ARG type issues)
-            ui_factory.created_ui = None
-            ui_factory.pending_params = (custom_class, obj_name, thread, parent)
+            factory = Bico_QWindowThread_UI.getUIFactory()
+            factory.created_ui = None
+            factory.pending_params = (custom_class, obj_name, thread, parent)
             
             # Use BlockingQueuedConnection to wait for the UI to be created
             # Call with no arguments - parameters are already stored
             QMetaObject.invokeMethod(
-                ui_factory,
+                factory,
                 "createUI",
                 Qt.BlockingQueuedConnection
             )
             
             # Return the created UI
-            return ui_factory.created_ui
+            return factory.created_ui
+
+    @staticmethod
+    def initializeFactory():
+        """
+        Initialize UI factory in the main thread.
+        This MUST be called from the main thread before any worker threads are created.
+        """
+        if Bico_QWindowThread_UI._ui_factory is None:
+            Bico_QWindowThread_UI._ui_factory = UIFactory()
+
+    @staticmethod
+    def getUIFactory():
+        """
+        Get the UI factory instance.
+
+        :return: UIFactory instance.
+        """
+        return Bico_QWindowThread_UI._ui_factory
 
     def getUIThreadHash():
         """
