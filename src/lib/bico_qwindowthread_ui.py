@@ -212,8 +212,10 @@ class Bico_QWindowThread_UI(QMainWindow):
             return
         
         __class__.ui_thread_hash_mutex.lock()
-        __class__.ui_thread_hash.pop(obj_name).deleteLater()
+        __class__.ui_thread_hash.pop(obj_name)
         __class__.ui_thread_hash_mutex.unlock()
+
+        ui.deleteLater()
 
     @Slot(str, "QVariant")
     def fromThread(self, mess, data):
