@@ -25,7 +25,6 @@ from PySide6.QtCore import QCoreApplication
 
 from .PyQtLib_Project_Template import Bico_QThread
 from .PyQtLib_Project_Template import Bico_QMessData
-from .PyQtLib_Project_Template import Bico_QMutexQueue
 
 
 class ThreadFactory(QObject):
@@ -120,11 +119,9 @@ class Bico_QWindowThread(QThread, Bico_QThread):
 
     def __del__(self):
         """
-        Destructor. Exits the application if all threads are finished.
+        Destructor. Cleanup is handled by selfRemove slot.
         """
-        if not __class__.thread_hash:
-            if __class__.main_app != None:
-                __class__.main_app.exit(0)
+        pass
 
     def start(self, priority=QThread.InheritPriority):
         """
@@ -296,6 +293,11 @@ class Bico_QWindowThread(QThread, Bico_QThread):
         __class__.thread_hash_mutex.lock()
         __class__.thread_hash.pop(obj_name).deleteLater()
         __class__.thread_hash_mutex.unlock()
+        
+        # Exit app if no more threads
+        if not __class__.thread_hash:
+            if __class__.main_app != None:
+                __class__.main_app.exit(0)
 
     @Slot(str, "QVariant")
     def fromUI(self, mess, data):
