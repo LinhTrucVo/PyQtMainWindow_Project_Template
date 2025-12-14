@@ -207,6 +207,10 @@ class Bico_QWindowThread_UI(QMainWindow):
 
         :param obj_name: Name of the UI thread to remove.
         """
+        ui = __class__.ui_thread_hash.get(obj_name)
+        if ui is None:
+            return
+        
         __class__.ui_thread_hash_mutex.lock()
         __class__.ui_thread_hash.pop(obj_name).deleteLater()
         __class__.ui_thread_hash_mutex.unlock()

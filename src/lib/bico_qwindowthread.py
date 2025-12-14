@@ -285,7 +285,11 @@ class Bico_QWindowThread(QThread, Bico_QThread):
 
         :param obj_name: Name of the thread to remove.
         """
-        if (__class__.thread_hash.get(obj_name)._ui != None):
+        thread = __class__.thread_hash.get(obj_name)
+        if thread is None:
+            return
+        
+        if thread._ui is not None:
             __class__.thread_hash.get(obj_name)._ui.setThread(None)
             __class__.thread_hash.get(obj_name)._ui.TERMINATE.emit()
             __class__.thread_hash.get(obj_name)._ui = None
