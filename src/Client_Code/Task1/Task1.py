@@ -39,6 +39,39 @@ class Task1(Bico_QWindowThread):
     ex_data_obj = Task1_Data()
     count = 0
 
+    def __init__(self, qin=None, qin_owner=0, qout=None, qout_owner=0, obj_name="", ui=None, parent=None):
+        """
+        Initialize Task1 thread with message handlers.
+        
+        Parameters
+        ----------
+        qin : Bico_QMutexQueue, optional
+            Input queue for the thread.
+        qin_owner : int, optional
+            Ownership flag for input queue.
+        qout : Bico_QMutexQueue, optional
+            Output queue for the thread.
+        qout_owner : int, optional
+            Ownership flag for output queue.
+        obj_name : str
+            Name/identifier for the thread object.
+        ui : Bico_QWindowThread_UI, optional
+            UI thread associated with this window thread.
+        parent : QObject, optional
+            Parent QObject for parent-child relationship.
+        """
+        # Call parent class __init__
+        super().__init__(qin, qin_owner, qout, qout_owner, obj_name, ui, parent)
+        
+        # Message handler dictionary - cleaner than if-else chains
+        self.message_handlers = {
+            "terminate": self._handle_terminate,
+            "mess_from_ui": self._handle_mess_from_ui,
+            "create": self._handle_create,
+            "create_child": self._handle_create_child,
+            "from_another_thread": self._handle_from_another_thread,
+        }
+
     def cleanupChildren(self):
         """
         Cleanup child threads before this thread is destroyed.
@@ -69,16 +102,8 @@ class Task1(Bico_QWindowThread):
             mess = input.mess()
             data = input.data()
             
-            # Message handler dictionary
-            message_handlers = {
-                "terminate": self._handle_terminate,
-                "mess_from_ui": self._handle_mess_from_ui,
-                "create": self._handle_create,
-                "create_child": self._handle_create_child,
-                "from_another_thread": self._handle_from_another_thread,
-            }
-            
-            handler = message_handlers.get(mess)
+            # Use the message handler dictionary from __init__
+            handler = self.message_handlers.get(mess)
             if handler:
                 continue_to_run = handler(data, input)
 
